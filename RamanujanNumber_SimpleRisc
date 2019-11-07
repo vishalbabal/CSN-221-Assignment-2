@@ -1,0 +1,34 @@
+# CSN-221-Assignment-2
+By Vishal Babal (18116084)
+
+
+mov r0,1           //n=1
+mov r1,1           //i=1
+mov r2,1           //j=1
+mov r3,0           //counter = 0
+
+//i is outer loop and j is inner loop
+.loop1:
+		.loop2:
+				mul r4,r1,r1
+				mul r4,r4,r1              //i^3
+				mul r5,r2,r2
+				mul r5,r5,r2              //j^3
+				add r6,r5+r4              //temp = j^3 + i^3
+				cmp(r6,r0)               //temp == n
+				beq .counter              // counts the appearance
+				cmp(r3,2)                //if counter ==2
+				beq .out                // execution ends
+				add r2,r2,1              //j++
+				cmp(r0,r2)               //if(n>j)
+				bgt .loop2              //loop of j runs again
+		add r1,r1,1                     //i++
+		cmp(r0,r1)                     //if(n>i)
+		bgt .loop1		               //loop of i runs again
+add r0,r0,1                           //else n++
+b .loop1                             // loop of i runs again
+
+.counter:
+		add r3,r3,1
+.out
+	exit
